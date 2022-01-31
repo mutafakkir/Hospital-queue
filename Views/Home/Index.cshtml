@@ -1,0 +1,23 @@
+﻿@using hospital.Entity;
+
+@model List<Row>
+
+<h1>Welcome to DB</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Full Name</th>
+      <th scope="col">Username</th>
+    </tr>
+  </thead>
+  @foreach (var user in Model)
+  {
+    <tbody>
+        <tr>
+        <td>@user.FullName</td>
+        <td>@user.Phone</td>
+        </tr>
+    </tbody>     
+  }
+</table>
