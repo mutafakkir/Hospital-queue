@@ -1,13 +1,11 @@
-using hospital.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using hospital.ViewModels;
 
-namespace hospital.Data;
-
+namespace hospital.Data; 
 public class RowDbContext : DbContext
 {
-    public RowDbContext(DbContextOptions<RowDbContext> options)
+    public RowDbContext (DbContextOptions<RowDbContext> options)
         : base(options) { }
-
     public DbSet<RowViewModel> rows { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)

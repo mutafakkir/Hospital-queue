@@ -18,6 +18,5 @@ public class RowViewModel
     public string Phone { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset ModifiedAt { get; set; }
-    public DateTimeOffset RowTime { get; set; }
     public bool IsActive { get; set; }
 }

@@ -1,12 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Reflection.Metadata;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using hospital.Data;
 using hospital.Models;
 using hospital.ViewModels;
-using System.Text.Json;
-using Microsoft.AspNetCore.Identity;
-using hospital.Data;
 
-namespace hospital.Controllers;
+namespace Queue.Controllers;
 
 public class HomeController : Controller
 {
@@ -16,20 +16,56 @@ public class HomeController : Controller
     public HomeController(ILogger<HomeController> logger, RowDbContext context)
     {
         _logger = logger;
-        _dbcontext = context;
+        _dbcontext=context;
     }
 
-    
     public IActionResult Index()
     {
-        var queues = _dbcontext.rows.ToList();
-        return View(queues);
+        var rows = _dbcontext.rows.ToList();
+        return View(rows);
     }
 
-    public IActionResult Privacy()
+    // public IActionResult AdminPage()
+    // {
+    //     var queues=_dbcontext.rows;
+    //     return View(queues);
+    // }
+
+    [HttpGet]
+    public IActionResult TakeRow()
     {
         return View();
     }
+    [HttpPost]
+    public IActionResult TakeRow([FromForm] RowViewModel model)
+    {
+        var user = new RowViewModel();
+
+        user.Id = model.Id;
+        user.Fullname = model.Fullname;
+        user.CreatedAt = model.CreatedAt = DateTimeOffset.UtcNow.ToLocalTime();
+        user.Phone = model.Phone;
+
+        try
+        {
+            _dbcontext.rows.Add(user);
+            _dbcontext.SaveChanges();
+        }
+
+        catch(ArgumentNullException)
+        {
+            System.Console.WriteLine("Rejected");
+        }
+        return RedirectToAction("ShowRow",user);
+    }
+    
+    [HttpGet]
+    public IActionResult ShowRow([FromRoute]RowViewModel model)
+    {
+        var client =_dbcontext.rows.FirstOrDefault(u => u.Id == model.Id);
+        return View(client);
+    }
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
