@@ -1,5 +1,8 @@
 @model hospital.ViewModels.RowViewModel;
 
+@{
+    Layout = "_AuthLayout";
+}
 
 <form class="form-signin" method="post" asp-action="TakeRow" asp-controller="Home">
     <input type="text" hidden="true">
