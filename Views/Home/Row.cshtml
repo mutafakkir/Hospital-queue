@@ -1,0 +1,25 @@
+@model hospital.ViewModels.RowViewModel;
+
+<form class="form-signin" method="post" asp-action="row" asp-controller="Home">
+    <input type="text" hidden="true">
+    <div class="text-center mb-4">
+        <img class="mb-4" src="~/logo.svg" alt="" width="72"
+            height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Очередь</h1>
+    </div>
+
+    <div class="form-label-group">
+        <input asp-for="Fullname" type="text" id="inputName" class="form-control" placeholder="Fullname" required="">
+        <label class="text-muted" asp-for="Fullname" for="inputName"></label>
+        <span asp-validation-for="Fullname" class="text-danger show"></span>
+    </div>
+
+    <div class="form-label-group">
+        <input asp-for="Phone" type="tel" id="inputPhone" class="form-control" placeholder="Phone" required="">
+        <label class="text-muted" asp-for="Phone" for="inputPhone"></label>
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block pos" type="submit">Войти</button>
+    <p class="mt-5 mb-3 text-muted text-center">© @DateTimeOffset.Now.Year</p>
+</form>
