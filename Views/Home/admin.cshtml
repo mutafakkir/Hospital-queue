@@ -1,0 +1,25 @@
+@model List<hospital.ViewModels.RowViewModel>
+
+<form method="post" asp-action="admin" asp-controller="Home">
+<table class="table table-bordered border-primary rounded-3">
+    <thead>
+        <tr>
+            <th scope="col">Ф.И.О</th>
+            <th scope="col">Tелефон Номер</th>
+            <th scope="col">Ваша очередь</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var user in Model)
+        {
+            <tr>
+                <td>@user.Fullname</td>
+                <td>@user.Phone</td>
+                <td>@user.CreatedAt.ToString("MMM dd, HH:mm")</td>
+                <td><button class="btn btn-danger" type="submit">Удалить из очереди</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+</form>
