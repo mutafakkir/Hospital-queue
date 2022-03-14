@@ -1,5 +1,6 @@
 namespace hospital.Models;
 
+// ViewModel
 public class ErrorViewModel
 {
     public string? RequestId { get; set; }
